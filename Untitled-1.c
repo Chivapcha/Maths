@@ -52,7 +52,7 @@ int main(){
                 printf("Division\n");
                 break;
             case 0:
-                printf("Sortie\n");
+                printf("Merci pour votre visite\n");
                 break;
         }
     }
