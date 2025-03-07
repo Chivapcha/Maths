@@ -7,13 +7,48 @@ void Addition(){
     int resultat;
     int a = rand() % 101;
     int b = rand() % 101;
-    printf("Quel est le resultat de %d + %d ?\n", a, b);
+    printf("%d + %d ?\n", a, b);
     printf("Entrez le resultat : \n");
     scanf("%d", &resultat);
     if (resultat == a+b){
         printf("Bravo !\n");
     } else {
         printf("Mauvaise reponse, la reponse etait %d\n", a+b);
+    }
+}
+
+void Soustraction(){
+    srand(time(NULL));
+    int resultat;
+    int a = rand() % 101;
+    int b = rand() % 101;
+    if (a<b){
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+    printf("%d - %d ?\n", a, b);
+    printf("Entrez le resultat : \n");
+    scanf("%d", &resultat);
+    if (resultat == a-b){
+        printf("Bravo !\n");
+    } else {
+        printf("Mauvaise reponse, la reponse etait %d\n", a-b);
+    }
+}
+
+void Multiplication(){
+    srand(time(NULL));
+    int resultat;
+    int a = rand() % 11;
+    int b = rand() % 11;
+    printf("%d * %d ?\n", a, b);
+    printf("Entrez le resultat : \n");
+    scanf("%d", &resultat);
+    if (resultat == a*b){
+        printf("Bravo !\n");
+    } else {
+        printf("Mauvaise reponse, la reponse etait %d\n", a*b);
     }
 }
 
@@ -41,9 +76,11 @@ int main(){
                 break;
             case 2:
                 printf("Soustraction\n");
+                Soustraction();
                 break;
             case 3:
                 printf("Multiplication\n");
+                Multiplication();
                 break;
             case 4:
                 printf("Tables de multiplication\n");
