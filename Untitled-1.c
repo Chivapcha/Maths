@@ -2,6 +2,8 @@
 #include <time.h>
 #include <stdlib.h>
 
+int points=0;
+
 void Addition(){
     srand(time(NULL));
     int resultat;
@@ -12,6 +14,7 @@ void Addition(){
     scanf("%d", &resultat);
     if (resultat == a+b){
         printf("Bravo !\n");
+        points++;
     } else {
         printf("Mauvaise reponse, la reponse etait %d\n", a+b);
     }
@@ -32,6 +35,7 @@ void Soustraction(){
     scanf("%d", &resultat);
     if (resultat == a-b){
         printf("Bravo !\n");
+        points++;
     } else {
         printf("Mauvaise reponse, la reponse etait %d\n", a-b);
     }
@@ -47,6 +51,7 @@ void Multiplication(){
     scanf("%d", &resultat);
     if (resultat == a*b){
         printf("Bravo !\n");
+        points++;
     } else {
         printf("Mauvaise reponse, la reponse etait %d\n", a*b);
     }
@@ -90,6 +95,7 @@ int main(){
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
+                printf("Vous avez obtenu %d points\n", points);
                 break;
         }
     }
