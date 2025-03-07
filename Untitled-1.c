@@ -52,6 +52,32 @@ void Multiplication(){
     }
 }
 
+void TablesMultiplications(){
+    int chiffre;
+    printf("Sur quelle table souhaitez-vous travailer ? (de 1 a 10)\n");
+    scanf("%d", &chiffre);
+    while (chiffre < 1 || chiffre > 10){
+        printf("Table invalide, veuillez choisir un nombre entre 1 et 10\n");
+        scanf("%d", &chiffre);
+    }
+    for (int i = 1; i <= 10; i++){
+        printf("%d * %d = %d\n", chiffre, i, chiffre*i);
+    }
+    printf("Exercice : remplissez la table\n");
+    // Terminer (les points,  verifier la boucle)
+    for (int i = 1; i <= 10; i++){
+        int resultat;
+        printf("%d * %d ?\n", chiffre, i);
+        printf("Entrez le resultat : \n");
+        scanf("%d", &resultat);
+        if (resultat == chiffre*i){
+            printf("Bravo !\n");
+        } else {
+            printf("Mauvaise reponse, la reponse etait %d\n", chiffre*i);
+        }
+    }
+}
+
 int main(){
     int choix = -1;
     while (choix != 0) {
