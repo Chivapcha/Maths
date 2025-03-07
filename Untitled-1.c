@@ -1,22 +1,4 @@
 #include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-
-void Addition(){
-    srand(time(NULL));
-    int resultat;
-    int a = rand() % 101;
-    int b = rand() % 101;
-    printf("Quel est le resultat de %d + %d ?\n", a, b);
-    printf("Entrez le resultat : \n");
-    scanf("%d", &resultat);
-    if (resultat == a+b){
-        printf("Bravo !\n");
-    } else {
-        printf("Mauvaise reponse, la reponse etait %d\n", a+b);
-    }
-}
-
 int main(){
     int choix = -1;
     while (choix != 0) {
