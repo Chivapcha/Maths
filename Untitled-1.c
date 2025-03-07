@@ -1,4 +1,15 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+
+int Addition(){
+    srand(time(NULL));
+    int a = rand() % 101;
+    int b = rand() % 101;
+    printf("Quel est le resultat de %d + %d ?\n", a, b);
+    return 0;
+}
+
 int main(){
     int choix = -1;
     while (choix != 0) {
@@ -19,6 +30,7 @@ int main(){
         switch(choix){
             case 1:
                 printf("Addition\n");
+                Addition();
                 break;
             case 2:
                 printf("Soustraction\n");
@@ -40,3 +52,4 @@ int main(){
 
     return 0;
 }
+
