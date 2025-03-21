@@ -57,7 +57,7 @@ void Multiplication(){
     }
 }
 
-void TablesMultiplications(){
+void TablesMultiplication(){
     int chiffre;
     printf("Sur quelle table souhaitez-vous travailer ? (de 1 a 10)\n");
     scanf("%d", &chiffre);
@@ -69,17 +69,20 @@ void TablesMultiplications(){
         printf("%d * %d = %d\n", chiffre, i, chiffre*i);
     }
     printf("Exercice : remplissez la table\n");
-    // Terminer (les points,  verifier la boucle)
+    int correct = 1;
     for (int i = 1; i <= 10; i++){
         int resultat;
-        printf("%d * %d ?\n", chiffre, i);
-        printf("Entrez le resultat : \n");
+        printf("%d * %d = ", chiffre, i);
         scanf("%d", &resultat);
         if (resultat == chiffre*i){
             printf("Bravo !\n");
         } else {
             printf("Mauvaise reponse, la reponse etait %d\n", chiffre*i);
+            correct = 0;
         }
+    }
+    if (correct){
+        points++;
     }
 }
 
@@ -115,6 +118,7 @@ int main(){
                 break;
             case 4:
                 printf("Tables de multiplication\n");
+                TablesMultiplication();
                 break;
             case 5:
                 printf("Division\n");
