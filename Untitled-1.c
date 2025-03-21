@@ -203,6 +203,35 @@ void Division(){
 
 int main(){
     int choix = -1;
+    char nomRecherche[20];
+    char nomNouveau[20];
+    char nom[20];
+    char choixConnection;
+    int AncienScore;
+    //on demande si l'utilisateur veut se connecter
+    printf("Voulez-vous vous connecter ? (O/N)\n");
+    scanf("%c", &choixConnection);
+    if (choixConnection == 'O'){
+        printf("Quel est votre nom ?\n");
+        scanf(" %s", nomRecherche);
+        //on ouvre le fichier en lecture
+        FILE *fichier = fopen("scores.txt", "r");
+        //on vérifie si le fichier est bien ouvert
+        if (fichier == NULL){
+            printf("Erreur lors de l'ouverture du fichier\n");
+            return 1;
+        }
+        //on parcout le fichier pour trouver le nom
+        while(fscanf(fichier, "%s %d", nom, &AncienScore) != EOF){
+            if(strcmp(nom, nomRecherche) == 0){
+                //on appelles les points 'AncienScore' pour additionner avec le nouveau score après
+                printf("Bienvenue %s, vous avez %d points\n", nom, AncienScore);
+                break;
+            }
+        }
+    //on ferme le fichier
+    fclose(fichier);
+    }
     while (choix != 0) {
         printf("+--------------------------------+\n");
         printf("|1 : Addition                    |\n");
@@ -237,14 +266,38 @@ int main(){
                 break;
             case 5:
                 printf("Division\n");
-                Division();
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
                 printf("Vous avez obtenu %d points\n", points);
+                //on demande si l'utilisateur veut sauvegarder ses points
+                printf("Voulez-vous sauvegarder vos points ? (O/N)\n");
+                char choixSauvegarde;
+                choixSauvegarde = 'O';
+                scanf(" %c", &choixSauvegarde);
+                //on ouvre le fichier en écriture si l'utilisateur veut sauvegarder ses points
+                if (choixSauvegarde == 'O'){
+                    FILE *fichier = fopen("scores.txt", "w");
+                    //on vérifie si le fichier est bien ouvert
+                    if (fichier == NULL){
+                        printf("Erreur lors de l'ouverture du fichier\n");
+                        return 1;
+                    }
+                    // si l'utilisateur est déjà connecté, on ajoute les points aux anciens points
+                    if (choixConnection == 'O'){
+                        fprintf(fichier, "%s %d\n", nom, AncienScore+points);
+                        fclose(fichier);
+                        break;
+                    // si l'utilisateur n'est pas connecté, on lui demande son nom pour le sauvegarder
+                    }else{
+                        printf("Quel est votre nom ?\n");
+                        scanf(" %s", nomNouveau);
+                        fprintf(fichier, "%s %d\n", nomNouveau, points);
+                        fclose(fichier);
+                    }
+                }
                 break;
         }
     }
     return 0;
 }
-
