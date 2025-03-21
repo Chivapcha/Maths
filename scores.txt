@@ -1,1 +1,3 @@
-Yana 3
+Yana 10
+Manon 10
+Manon 20

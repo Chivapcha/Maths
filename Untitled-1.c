@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 
 int points=0;
 
@@ -266,6 +267,7 @@ int main(){
                 break;
             case 5:
                 printf("Division\n");
+                Division();
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
@@ -277,7 +279,7 @@ int main(){
                 scanf(" %c", &choixSauvegarde);
                 //on ouvre le fichier en écriture si l'utilisateur veut sauvegarder ses points
                 if (choixSauvegarde == 'O'){
-                    FILE *fichier = fopen("scores.txt", "w");
+                    FILE *fichier = fopen("scores.txt", "a");
                     //on vérifie si le fichier est bien ouvert
                     if (fichier == NULL){
                         printf("Erreur lors de l'ouverture du fichier\n");
