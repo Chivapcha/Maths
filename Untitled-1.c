@@ -6,22 +6,41 @@ int points=0;
 
 void Addition(){
     srand(time(NULL));
+    int trouve = 0;
     int resultat;
+    int i = 1;
     int a = rand() % 101;
     int b = rand() % 101;
-    printf("%d + %d ?\n", a, b);
-    printf("Entrez le resultat : \n");
-    scanf("%d", &resultat);
-    if (resultat == a+b){
-        printf("Bravo !\n");
-        points++;
-    } else {
-        printf("Mauvaise reponse, la reponse etait %d\n", a+b);
+    while (trouve == 0 && i <= 3){
+        printf("%d + %d = ", a, b);
+        scanf("%d", &resultat);
+        if (resultat == a+b){
+            trouve = 1;
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("La reponse etait %d\n", a+b);
     }
 }
 
 void Soustraction(){
     srand(time(NULL));
+    int trouve = 0;
+    int i = 1;
     int resultat;
     int a = rand() % 101;
     int b = rand() % 101;
@@ -30,34 +49,68 @@ void Soustraction(){
         a = b;
         b = temp;
     }
-    printf("%d - %d ?\n", a, b);
-    printf("Entrez le resultat : \n");
-    scanf("%d", &resultat);
-    if (resultat == a-b){
-        printf("Bravo !\n");
-        points++;
-    } else {
-        printf("Mauvaise reponse, la reponse etait %d\n", a-b);
+    while (trouve == 0 && i <= 3){
+        printf("%d - %d = ", a, b);
+        scanf("%d", &resultat);
+        if (resultat == a-b){
+            trouve = 1;
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("La reponse etait %d\n", a-b);
     }
 }
 
 void Multiplication(){
     srand(time(NULL));
+    int trouve = 0;
+    int i = 1;
     int resultat;
     int a = rand() % 11;
     int b = rand() % 11;
-    printf("%d * %d ?\n", a, b);
-    printf("Entrez le resultat : \n");
-    scanf("%d", &resultat);
-    if (resultat == a*b){
-        printf("Bravo !\n");
-        points++;
-    } else {
-        printf("Mauvaise reponse, la reponse etait %d\n", a*b);
+    while (trouve == 0 && i <= 3){
+        printf("%d * %d = ", a, b);
+        scanf("%d", &resultat);
+        if (resultat == a*b){
+            trouve = 1;
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("La reponse etait %d\n", a*b);
     }
 }
 
+//Le joueur a le droit à 3 erreur pour obtenir des points
 void TablesMultiplication(){
+    int fautes = 0;
     int chiffre;
     printf("Sur quelle table souhaitez-vous travailer ? (de 1 a 10)\n");
     scanf("%d", &chiffre);
@@ -69,21 +122,83 @@ void TablesMultiplication(){
         printf("%d * %d = %d\n", chiffre, i, chiffre*i);
     }
     printf("Exercice : remplissez la table\n");
-    int correct = 1;
     for (int i = 1; i <= 10; i++){
         int resultat;
-        printf("%d * %d = ", chiffre, i);
-        scanf("%d", &resultat);
-        if (resultat == chiffre*i){
-            printf("Bravo !\n");
-        } else {
-            printf("Mauvaise reponse, la reponse etait %d\n", chiffre*i);
-            correct = 0;
+        int j = 1;
+        int trouve = 0;
+        while (trouve == 0 && j <= 3){
+            printf("%d * %d = ", chiffre, i);
+            scanf("%d", &resultat);
+            if (resultat != chiffre*i){
+                printf("Perdu... Il vous reste %d essais\n", 3-j);
+                fautes += 1;
+            }
+            else {
+                trouve = 1;
+            }
+            j++;
+        }
+        if (trouve == 0){
+            printf("La reponse etait %d\n", chiffre*i);
         }
     }
-    if (correct){
-        points++;
+    if (fautes == 0){
+        printf("Vous avez fait 0 fautes et obtenu 10 points !\n");
+        points += 10;
     }
+    else if (fautes == 1){
+        printf("Vous avez fait 1 faute et obtenu 5 points !\n");
+        points += 5;
+    }
+    else if (fautes == 2){
+        printf("Vous avez fait 2 fautes et obtenu 1 points !\n");
+        points += 1;
+    }
+    else {
+        printf("Vous avez fait %d fautes et n'avez pas obtenu de points\n", fautes);
+    }
+}
+
+void Division(){
+    srand(time(NULL));
+    int trouve = 0;
+    int i = 1;
+    int quotidient;
+    int reste;
+    int a = rand() % 100+1;
+    int b = rand() % 10+1;
+    if (a<b){
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+    while (trouve == 0 && i <= 3){
+        printf("Le quotidient de %d / %d = ", a, b);
+        scanf("%d", &quotidient);
+        printf("Le reste de %d / %d = ", a, b);
+        scanf("%d", &reste);
+        if (quotidient == a/b && reste == a%b){
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+            trouve = 1;
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("Le quotidient etait %d et le reste etait %d\n", a/b, a%b);
+    }
+        
 }
 
 int main(){
@@ -122,6 +237,7 @@ int main(){
                 break;
             case 5:
                 printf("Division\n");
+                Division();
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
