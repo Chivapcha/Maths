@@ -202,6 +202,65 @@ void Division(){
         
 }
 
+void Durees(){
+    srand(time(NULL));
+    int trouve = 0;
+    int i = 1;
+    int resultat;
+    int option = rand() % 2;
+    if (option == 0) {
+        int heures = rand() % 10+1;
+        int minutes = rand() % 60;
+        while (trouve == 0 && i <= 3){
+            printf("%d h %d min = ? min\n", heures, minutes);
+            scanf("%d", &resultat);
+            if (resultat == (heures*60)+minutes){
+                trouve = 1;
+                printf("Bravo !\n");
+                if (i == 1) {
+                    printf("Vous avez gagne 10 points\n");
+                    points += 10;
+                } else if (i == 2) {
+                    printf("Vous avez gagne 5 points\n");
+                    points += 5;
+                } else {
+                    printf("Vous avez gagne 1 point\n");
+                    points += 1;
+                }
+            } else {
+                printf("Perdu... Il vous reste %d essais\n", 3-i);
+            }
+            i++;
+        }
+    }
+    
+    if (option == 1) {
+        int minutes = rand() % 10+1;
+        int secondes = rand() % 60;
+        while (trouve == 0 && i <= 3){
+            printf("%d m %d s = ? s\n", minutes, secondes);
+            scanf("%d", &resultat);
+            if (resultat == (minutes*60)+secondes){
+                trouve = 1;
+                printf("Bravo !\n");
+                if (i == 1) {
+                    printf("Vous avez gagne 10 points\n");
+                    points += 10;
+                } else if (i == 2) {
+                    printf("Vous avez gagne 5 points\n");
+                    points += 5;
+                } else {
+                    printf("Vous avez gagne 1 point\n");
+                    points += 1;
+                }
+            } else {
+                printf("Perdu... Il vous reste %d essais\n", 3-i);
+            }
+            i++;
+        }
+    }
+}
+
 typedef struct {
     char nom[20];
     int score;
@@ -272,9 +331,6 @@ int main() {
             }
             fclose(fichier);
         }
-    } else {
-        printf("Quel est votre nom ?\n");
-        scanf(" %s", nom);
     }
 
     while (choix != 0) {
@@ -284,13 +340,14 @@ int main() {
         printf("|3 : Multiplication              |\n");
         printf("|4 : Tables des multiplications  |\n");
         printf("|5 : Division                    |\n");
+        printf("|6 : Durees                      |\n");
         printf("|0 : Sortir du jeu               |\n");
         printf("+--------------------------------+\n");
         printf("Quel est votre choix ?\n");
         scanf("%d", &choix);
 
-        while (choix < 0 || choix > 5) {
-            printf("Choix invalide, veuillez choisir un nombre entre 0 et 5\n");
+        while (choix < 0 || choix > 6) {
+            printf("Choix invalide, veuillez choisir un nombre entre 0 et 6\n");
             scanf("%d", &choix);
         }
 
@@ -314,6 +371,10 @@ int main() {
             case 5:
                 printf("Division\n");
                 Division();
+                break;
+            case 6:
+                printf("Durees\n");
+                Durees();
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
