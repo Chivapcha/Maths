@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 int points=0;
 
@@ -202,6 +203,94 @@ void Division(){
         
 }
 
+void Longueurs(){
+    srand(time(NULL));
+    int option1 = rand() % 7;
+    int option2 = rand() % 7;
+    while (option1 == option2){
+        option2 = rand() % 7;
+    }
+    if (option1 > option2){
+        int temp = option1;
+        option1 = option2;
+        option2 = temp;
+    }
+    char tabMesures[7][3] = {"km", "hm", "dam", "m", "dm", "cm", "mm"};
+    int trouve = 0;
+    int i = 1;
+    int resultat;
+    int a = rand() % 10 + 1;
+    int reponse = a*pow(10, (option2-option1));
+    while (trouve == 0 && i <= 3){
+        printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
+        scanf("%d", &resultat);
+        if (resultat == reponse){
+            trouve = 1;
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("La reponse etait %d\n", reponse);
+    }
+}
+
+void Masses(){
+    srand(time(NULL));
+    int option1 = rand() % 7;
+    int option2 = rand() % 7;
+    while (option1 == option2){
+        option2 = rand() % 7;
+    }
+    if (option1 > option2){
+        int temp = option1;
+        option1 = option2;
+        option2 = temp;
+    }
+    char tabMesures[7][3] = {"kg", "hg", "dag", "g", "dg", "cg", "mg"};
+    int trouve = 0;
+    int i = 1;
+    int resultat;
+    int a = rand() % 10 + 1;
+    int reponse = a*pow(10, (option2-option1));
+    while (trouve == 0 && i <= 3){
+        printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
+        scanf("%d", &resultat);
+        if (resultat == reponse){
+            trouve = 1;
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("La reponse etait %d\n", reponse);
+    }
+}
+
 void Durees(){
     srand(time(NULL));
     int trouve = 0;
@@ -232,9 +321,12 @@ void Durees(){
             }
             i++;
         }
+        if (trouve == 0){
+            printf("La reponse etait %d\n", (heures*60)+minutes);
+        }
     }
     
-    if (option == 1) {
+    else {
         int minutes = rand() % 10+1;
         int secondes = rand() % 60;
         while (trouve == 0 && i <= 3){
@@ -257,6 +349,9 @@ void Durees(){
                 printf("Perdu... Il vous reste %d essais\n", 3-i);
             }
             i++;
+        }
+        if (trouve == 0){
+            printf("La reponse etait %d\n", (minutes*60)+secondes);
         }
     }
 }
@@ -340,14 +435,16 @@ int main() {
         printf("|3 : Multiplication              |\n");
         printf("|4 : Tables des multiplications  |\n");
         printf("|5 : Division                    |\n");
-        printf("|6 : Durees                      |\n");
+        printf("|6 : Longueurs                   |\n");
+        printf("|7 : Masses                      |\n");
+        printf("|8 : Durees                      |\n");
         printf("|0 : Sortir du jeu               |\n");
         printf("+--------------------------------+\n");
         printf("Quel est votre choix ?\n");
         scanf("%d", &choix);
 
-        while (choix < 0 || choix > 6) {
-            printf("Choix invalide, veuillez choisir un nombre entre 0 et 6\n");
+        while (choix < 0 || choix > 8) {
+            printf("Choix invalide, veuillez choisir un nombre entre 0 et 8\n");
             scanf("%d", &choix);
         }
 
@@ -373,6 +470,14 @@ int main() {
                 Division();
                 break;
             case 6:
+                printf("Longueurs\n");
+                Longueurs();
+                break;
+            case 7:
+                printf("Masses\n");
+                Masses();
+                break;
+            case 8:
                 printf("Durees\n");
                 Durees();
                 break;
@@ -386,11 +491,16 @@ int main() {
                 scanf(" %c", &choixSauvegarde);
 
                 if (choixSauvegarde == 'O') {
-                    sauvegarderScore(nom, points);
+                    if (choixConnection == 'O') {
+                        sauvegarderScore(nom, points);
+                    } else {
+                        printf("Quel est votre nom ?\n");
+                        scanf(" %s", nom);
+                        sauvegarderScore(nom, points);
+                    }
                 }
                 break;
         }
     }
-
     return 0;
 }
