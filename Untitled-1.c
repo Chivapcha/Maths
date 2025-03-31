@@ -356,6 +356,51 @@ void Durees(){
     }
 }
 
+// TERMINER LA FONCTION AIRES
+void Aires(){
+    srand(time(NULL));
+    int option1 = rand() % 7;
+    int option2 = rand() % 7;
+    while (option1 == option2){
+        option2 = rand() % 7;
+    }
+    if (option1 > option2){
+        int temp = option1;
+        option1 = option2;
+        option2 = temp;
+    }
+    char tabMesures[7][5] = {"km2", "hm2", "dam2", "m2", "dm2", "cm2", "mm2"};
+    int trouve = 0;
+    int i = 1;
+    int resultat;
+    int a = rand() % 10 + 1;
+    int reponse = a*pow(10, (option2-option1)*2);
+    while (trouve == 0 && i <= 3){
+        printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
+        scanf("%d", &resultat);
+        if (resultat == reponse){
+            trouve = 1;
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("La reponse etait %d\n", reponse);
+    }
+}
+
 typedef struct {
     char nom[20];
     int score;
