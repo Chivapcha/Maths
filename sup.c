@@ -20,11 +20,13 @@ void Probleme(){
     }
     int nombres= rand()%30+1;
     int nombres2= rand()%10+1;
+    //fonctionne
     printf("choix 1 : %d\n", choix1);
     printf("choix 2 : %d\n", choix2);
     printf("nombres : %d\n", nombres);
     printf("nombres2 : %d\n", nombres2);
-    printf("Il y a %d %s dans %d %s on donne %d %s, combient y a t-il de %s dans %s ? \n, nombres, choixBoites[choix2], nombres2, tab[choix1], nombres2, tab[choix1], choixBoites[choix1], tab[choix1]);");
+    //renvoie truc chelou, à modifier
+    printf("Il y a %d %s dans %d %s on donne %d %s, combient y a t-il de %s dans %s ? \n, nombres, choixBoite[choix2], nombres2, tab[choix1], nombres2, tab[choix1], choixBoite[choix1], tab[choix1])");
 
 }
 int main(){
