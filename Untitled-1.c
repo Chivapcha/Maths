@@ -400,6 +400,75 @@ void Aires(){
     }
 }
 
+void GrandsNombres() {
+    int choix;
+    scanf("%d", &choix);
+    int tab_choix [7];
+    for (int i = 6; i >= 0; i--) {
+        tab_choix[i] = choix % 10;
+        choix /= 10;
+    }
+    for (int i = 0; i < 7; i++) {
+        printf("%d", tab_choix[i]);
+    }
+    printf("\n");
+
+    char zero_neuf[10][6] = {"", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"};
+    char onze_dixneuf[10][10] = {"", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"};
+    char dizaines[10][16] = {"", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante-dix", "quatre-vingt", "quatre-vingt-dix"};
+
+    char nombre_ecrit[7][100];
+    if (tab_choix[0] != 0) { // si le premier nombre (millions) est différent de 0, on affiche le chiffre et "million"
+        strcat(nombre_ecrit[0], zero_neuf[tab_choix[0]]);
+        if (tab_choix[0] = 1) { // si le chiffre est égale à 1, on ajoute "million" sans "s"
+            strcat(nombre_ecrit[0], " million");
+        }
+        else { // sinon, on ajoute "millions"
+            strcat(nombre_ecrit[0], " millions");
+        }
+    }
+    if (tab_choix[1] != 0) { // si le deuxième nombre (centaines de milles) est différent de 0, on affiche le chiffre et "cent"
+        strcat(nombre_ecrit[1], zero_neuf[tab_choix[1]]);
+        strcat(nombre_ecrit[1], " cent");
+    }
+    if (tab_choix[2] != 0) { // si le troisième nombre (dizaines de milles) est différent de 0 :
+        if (tab_choix[2] == 1 && tab_choix[3] != 0) { // si ce nombre est 1 et qu'il y a un chiffre après, on affiche le nombre entre 11 et 19
+            strcat(nombre_ecrit[2], onze_dixneuf[tab_choix[3]]);
+        } else { // sinon, on affiche le chiffre et "dix" ou "vingt" ou "trente", etc.
+            strcat(nombre_ecrit[2], dizaines[tab_choix[2]]);
+        }
+    }
+    if (tab_choix[3] != 0) { // si le quatrième nombre (unités de milles) est différent de 0, on affiche le chiffre
+        if (tab_choix[2] != 1) { // si le chiffre précédent n'est pas 1 (le nombre d'unités de milles n'est pas entre 11 et 19), on affiche le chiffre
+            strcat(nombre_ecrit[3], zero_neuf[tab_choix[3]]);
+        }
+    }
+    if (tab_choix[1] != 0 || tab_choix[2] != 0 || tab_choix[3] != 0) { // si il y a un nombre de milles alors on affiche "mille" à la fin
+        strcat(nombre_ecrit[3], " mille");
+    }
+    if (tab_choix[4] != 0) { // si le cinquième nombre (centaines) est différent de 0, on affiche le chiffre et "cent"
+        strcat(nombre_ecrit[4], zero_neuf[tab_choix[4]]);
+        strcat(nombre_ecrit[4], " cent");
+    }
+    if (tab_choix[5] != 0) { // si le sixième nombre (dizaines) est différent de 0 :
+        if (tab_choix[5] == 1 && tab_choix[6] != 0) { // si ce nombre est 1 et qu'il y a un chiffre après, on affiche le nombre entre 11 et 19
+            strcat(nombre_ecrit[5], onze_dixneuf[tab_choix[6]]);
+        } else { // sinon, on affiche le chiffre et "dix" ou "vingt" ou "trente", etc.
+            strcat(nombre_ecrit[5], dizaines[tab_choix[5]]);
+        }
+    }
+    if (tab_choix[6] != 0) { // si le septième nombre (unités) est différent de 0, on affiche le chiffre
+        if (tab_choix[5] != 1) {
+            strcat(nombre_ecrit[6], zero_neuf[tab_choix[6]]);
+        }
+    }
+    // On affiche le nombre écrit en toutes lettres
+    for (int i = 0; i < 7; i++) {
+        printf("%s ", nombre_ecrit[i]);
+    }
+    printf("\n");
+}
+
 typedef struct {
     char nom[20];
     int score;
@@ -483,13 +552,14 @@ int main() {
         printf("|7 : Masses                      |\n");
         printf("|8 : Durees                      |\n");
         printf("|9 : Aires                       |\n");
+        printf("10 : Grands nombres              |\n");
         printf("|0 : Sortir du jeu               |\n");
         printf("+--------------------------------+\n");
         printf("Quel est votre choix ?\n");
         scanf("%d", &choix);
 
-        while (choix < 0 || choix > 9) {
-            printf("Choix invalide, veuillez choisir un nombre entre 0 et 9\n");
+        while (choix < 0 || choix > 10) {
+            printf("Choix invalide, veuillez choisir un nombre entre 0 et 10\n");
             scanf("%d", &choix);
         }
 
@@ -529,6 +599,10 @@ int main() {
             case 9:
                 printf("Aires\n");
                 Aires();
+                break;
+            case 10:
+                printf("Grands nombres\n");
+                GrandsNombres();
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
