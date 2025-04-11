@@ -4,6 +4,8 @@
 #include <time.h>
 
 void Probleme(){
+    int reponse_candidat;
+    int reponse_correcte;
     int choix1, choix2;
     char tab[3][20]={"sacs", "boites", "pochettes"};
     char choixBoite[3][20]= {"feutres", "crayons", "petites voitures"};
@@ -20,13 +22,16 @@ void Probleme(){
     }
     int nombres= rand()%30+1;
     int nombres2= rand()%10+1;
-    //fonctionne
-    printf("choix 1 : %d\n", choix1);
-    printf("choix 2 : %d\n", choix2);
-    printf("nombres : %d\n", nombres);
-    printf("nombres2 : %d\n", nombres2);
-    //renvoie truc chelou, à modifier
-    printf("Il y a %d %s dans %d %s on donne %d %s, combient y a t-il de %s dans %s ? \n, nombres, choixBoite[choix2], nombres2, tab[choix1], nombres2, tab[choix1], choixBoite[choix1], tab[choix1])");
+    int nombres3= rand()%20+1;
+    printf("Il y a %d %s dans %d %s on donne %d %s, combient y a t-il de %s maintenant? \n", nombres, choixBoite[choix2], nombres2, tab[choix1], nombres3, choixBoite[choix2], choixBoite[choix2]);
+    scanf("%d", &reponse_candidat);
+    reponse_correcte = nombres*nombres2 + nombres3;
+    if (reponse_candidat == reponse_correcte){
+        printf("Bravo, vous avez repondu juste !\n");
+    }
+    else{
+        printf("Dommage, la bonne reponse etait %d\n", reponse_correcte);
+    }
 
 }
 int main(){
