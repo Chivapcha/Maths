@@ -356,7 +356,6 @@ void Durees(){
     }
 }
 
-// TERMINER LA FONCTION AIRES
 void Aires(){
     srand(time(NULL));
     int option1 = rand() % 7;
@@ -373,7 +372,7 @@ void Aires(){
     int trouve = 0;
     int i = 1;
     int resultat;
-    int a = rand() % 10 + 1;
+    int a = rand() % 10;
     int reponse = a*pow(10, (option2-option1)*2);
     while (trouve == 0 && i <= 3){
         printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
@@ -483,13 +482,14 @@ int main() {
         printf("|6 : Longueurs                   |\n");
         printf("|7 : Masses                      |\n");
         printf("|8 : Durees                      |\n");
+        printf("|9 : Aires                       |\n");
         printf("|0 : Sortir du jeu               |\n");
         printf("+--------------------------------+\n");
         printf("Quel est votre choix ?\n");
         scanf("%d", &choix);
 
-        while (choix < 0 || choix > 8) {
-            printf("Choix invalide, veuillez choisir un nombre entre 0 et 8\n");
+        while (choix < 0 || choix > 9) {
+            printf("Choix invalide, veuillez choisir un nombre entre 0 et 9\n");
             scanf("%d", &choix);
         }
 
@@ -525,6 +525,10 @@ int main() {
             case 8:
                 printf("Durees\n");
                 Durees();
+                break;
+            case 9:
+                printf("Aires\n");
+                Aires();
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
