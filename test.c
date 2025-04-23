@@ -5,6 +5,38 @@
 #include <math.h>
 
 int points=0;
+void Multiplication(){
+    srand(time(NULL));
+    int trouve = 0;
+    int i = 1;
+    int resultat;
+    int a = rand() % 11;
+    int b = rand() % 11;
+    while (trouve == 0 && i <= 3){
+        printf("%d * %d = ", a, b);
+        scanf("%d", &resultat);
+        if (resultat == a*b){
+            trouve = 1;
+            printf("Bravo !\n");
+            if (i == 1) {
+                printf("Vous avez gagne 10 points\n");
+                points += 10;
+            } else if (i == 2) {
+                printf("Vous avez gagne 5 points\n");
+                points += 5;
+            } else {
+                printf("Vous avez gagne 1 point\n");
+                points += 1;
+            }
+        } else {
+            printf("Perdu... Il vous reste %d essais\n", 3-i);
+        }
+        i++;
+    }
+    if (trouve == 0){
+        printf("La reponse etait %d\n", a*b);
+    }
+}
 typedef struct {
     char nom[20];
     int score;
@@ -22,17 +54,14 @@ void sauvegarderScore(char *nomJoueur, int nouveauxPoints) {
     time_t now = time(NULL);
     strftime(dateHeureActuelle, sizeof(dateHeureActuelle), "%Y-%m-%d %H:%M:%S", localtime(&now));
 
-
-
     // Lire les scores existants dans le fichier
     if (fichier != NULL) {
         while (fscanf(fichier, "%s %d %[^\n]", joueurs[nbJoueurs].nom, &joueurs[nbJoueurs].score, joueurs[nbJoueurs].dateHeure) != EOF) {
             if (strcmp(joueurs[nbJoueurs].nom, nomJoueur) == 0) {
-                // Ajouter les nouveaux points au score existant et mettre à jour la date/heure
-                joueurs[nbJoueurs].score += nouveauxPoints;
+                // Mettre à jour le score et la date/heure pour le joueur existant
+                joueurs[nbJoueurs].score = nouveauxPoints;
                 strcpy(joueurs[nbJoueurs].dateHeure, dateHeureActuelle);
                 joueurExistant = 1;
-
             }
             nbJoueurs++;
         }
@@ -126,11 +155,9 @@ int main() {
         switch (choix) {
             case 1:
                 printf("Addition\n");
-                Addition();
                 break;
             case 2:
                 printf("Soustraction\n");
-                Soustraction();
                 break;
             case 3:
                 printf("Multiplication\n");
@@ -138,27 +165,21 @@ int main() {
                 break;
             case 4:
                 printf("Tables de multiplication\n");
-                TablesMultiplication();
                 break;
             case 5:
                 printf("Division\n");
-                Division();
                 break;
             case 6:
                 printf("Longueurs\n");
-                Longueurs();
                 break;
             case 7:
                 printf("Masses\n");
-                Masses();
                 break;
             case 8:
                 printf("Durees\n");
-                Durees();
                 break;
             case 9:
                 printf("Aires\n");
-                Aires();
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
