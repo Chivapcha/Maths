@@ -5,404 +5,10 @@
 #include <math.h>
 
 int points=0;
-
-void Addition(){
-    srand(time(NULL));
-    int trouve = 0;
-    int resultat;
-    int i = 1;
-    int a = rand() % 101;
-    int b = rand() % 101;
-    while (trouve == 0 && i <= 3){
-        printf("%d + %d = ", a, b);
-        scanf("%d", &resultat);
-        if (resultat == a+b){
-            trouve = 1;
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-        } else {
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        i++;
-    }
-    if (trouve == 0){
-        printf("La reponse etait %d\n", a+b);
-    }
-}
-
-void Soustraction(){
-    srand(time(NULL));
-    int trouve = 0;
-    int i = 1;
-    int resultat;
-    int a = rand() % 101;
-    int b = rand() % 101;
-    if (a<b){
-        int temp = a;
-        a = b;
-        b = temp;
-    }
-    while (trouve == 0 && i <= 3){
-        printf("%d - %d = ", a, b);
-        scanf("%d", &resultat);
-        if (resultat == a-b){
-            trouve = 1;
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-        } else {
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        i++;
-    }
-    if (trouve == 0){
-        printf("La reponse etait %d\n", a-b);
-    }
-}
-
-void Multiplication(){
-    srand(time(NULL));
-    int trouve = 0;
-    int i = 1;
-    int resultat;
-    int a = rand() % 11;
-    int b = rand() % 11;
-    while (trouve == 0 && i <= 3){
-        printf("%d * %d = ", a, b);
-        scanf("%d", &resultat);
-        if (resultat == a*b){
-            trouve = 1;
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-        } else {
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        i++;
-    }
-    if (trouve == 0){
-        printf("La reponse etait %d\n", a*b);
-    }
-}
-
-//Le joueur a le droit à 3 erreur pour obtenir des points
-void TablesMultiplication(){
-    int fautes = 0;
-    int chiffre;
-    printf("Sur quelle table souhaitez-vous travailer ? (de 1 a 10)\n");
-    scanf("%d", &chiffre);
-    while (chiffre < 1 || chiffre > 10){
-        printf("Table invalide, veuillez choisir un nombre entre 1 et 10\n");
-        scanf("%d", &chiffre);
-    }
-    for (int i = 1; i <= 10; i++){
-        printf("%d * %d = %d\n", chiffre, i, chiffre*i);
-    }
-    printf("Exercice : remplissez la table\n");
-    for (int i = 1; i <= 10; i++){
-        int resultat;
-        int j = 1;
-        int trouve = 0;
-        while (trouve == 0 && j <= 3){
-            printf("%d * %d = ", chiffre, i);
-            scanf("%d", &resultat);
-            if (resultat != chiffre*i){
-                printf("Perdu... Il vous reste %d essais\n", 3-j);
-                fautes += 1;
-            }
-            else {
-                trouve = 1;
-            }
-            j++;
-        }
-        if (trouve == 0){
-            printf("La reponse etait %d\n", chiffre*i);
-        }
-    }
-    if (fautes == 0){
-        printf("Vous avez fait 0 fautes et obtenu 10 points !\n");
-        points += 10;
-    }
-    else if (fautes == 1){
-        printf("Vous avez fait 1 faute et obtenu 5 points !\n");
-        points += 5;
-    }
-    else if (fautes == 2){
-        printf("Vous avez fait 2 fautes et obtenu 1 points !\n");
-        points += 1;
-    }
-    else {
-        printf("Vous avez fait %d fautes et n'avez pas obtenu de points\n", fautes);
-    }
-}
-
-void Division(){
-    srand(time(NULL));
-    int trouve = 0;
-    int i = 1;
-    int quotient;
-    int reste;
-    int a = rand() % 100+1;
-    int b = rand() % 10+1;
-    if (a<b){
-        int temp = a;
-        a = b;
-        b = temp;
-    }
-    while (trouve == 0 && i <= 3){
-        printf("Le quotient de %d / %d = ", a, b);
-        scanf("%d", &quotient);
-        printf("Le reste de %d / %d = ", a, b);
-        scanf("%d", &reste);
-        if (quotient == a/b && reste == a%b){
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-            trouve = 1;
-        } else {
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        i++;
-    }
-    if (trouve == 0){
-        printf("Le quotient etait %d et le reste etait %d\n", a/b, a%b);
-    }
-        
-}
-
-void Longueurs(){
-    srand(time(NULL));
-    int option1 = rand() % 7;
-    int option2 = rand() % 7;
-    while (option1 == option2){
-        option2 = rand() % 7;
-    }
-    if (option1 > option2){
-        int temp = option1;
-        option1 = option2;
-        option2 = temp;
-    }
-    char tabMesures[7][3] = {"km", "hm", "dam", "m", "dm", "cm", "mm"};
-    int trouve = 0;
-    int i = 1;
-    int resultat;
-    int a = rand() % 10 + 1;
-    int reponse = a*pow(10, (option2-option1));
-    while (trouve == 0 && i <= 3){
-        printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
-        scanf("%d", &resultat);
-        if (resultat == reponse){
-            trouve = 1;
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-        } else {
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        i++;
-    }
-    if (trouve == 0){
-        printf("La reponse etait %d\n", reponse);
-    }
-}
-
-void Masses(){
-    srand(time(NULL));
-    int option1 = rand() % 7;
-    int option2 = rand() % 7;
-    while (option1 == option2){
-        option2 = rand() % 7;
-    }
-    if (option1 > option2){
-        int temp = option1;
-        option1 = option2;
-        option2 = temp;
-    }
-    char tabMesures[7][3] = {"kg", "hg", "dag", "g", "dg", "cg", "mg"};
-    int trouve = 0;
-    int i = 1;
-    int resultat;
-    int a = rand() % 10 + 1;
-    int reponse = a*pow(10, (option2-option1));
-    while (trouve == 0 && i <= 3){
-        printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
-        scanf("%d", &resultat);
-        if (resultat == reponse){
-            trouve = 1;
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-        } else {
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        i++;
-    }
-    if (trouve == 0){
-        printf("La reponse etait %d\n", reponse);
-    }
-}
-
-void Durees(){
-    srand(time(NULL));
-    int trouve = 0;
-    int i = 1;
-    int resultat;
-    int option = rand() % 2;
-    if (option == 0) {
-        int heures = rand() % 10+1;
-        int minutes = rand() % 60;
-        while (trouve == 0 && i <= 3){
-            printf("%d h %d min = ? min\n", heures, minutes);
-            scanf("%d", &resultat);
-            if (resultat == (heures*60)+minutes){
-                trouve = 1;
-                printf("Bravo !\n");
-                if (i == 1) {
-                    printf("Vous avez gagne 10 points\n");
-                    points += 10;
-                } else if (i == 2) {
-                    printf("Vous avez gagne 5 points\n");
-                    points += 5;
-                } else {
-                    printf("Vous avez gagne 1 point\n");
-                    points += 1;
-                }
-            } else {
-                printf("Perdu... Il vous reste %d essais\n", 3-i);
-            }
-            i++;
-        }
-        if (trouve == 0){
-            printf("La reponse etait %d\n", (heures*60)+minutes);
-        }
-    }
-    
-    else {
-        int minutes = rand() % 10+1;
-        int secondes = rand() % 60;
-        while (trouve == 0 && i <= 3){
-            printf("%d m %d s = ? s\n", minutes, secondes);
-            scanf("%d", &resultat);
-            if (resultat == (minutes*60)+secondes){
-                trouve = 1;
-                printf("Bravo !\n");
-                if (i == 1) {
-                    printf("Vous avez gagne 10 points\n");
-                    points += 10;
-                } else if (i == 2) {
-                    printf("Vous avez gagne 5 points\n");
-                    points += 5;
-                } else {
-                    printf("Vous avez gagne 1 point\n");
-                    points += 1;
-                }
-            } else {
-                printf("Perdu... Il vous reste %d essais\n", 3-i);
-            }
-            i++;
-        }
-        if (trouve == 0){
-            printf("La reponse etait %d\n", (minutes*60)+secondes);
-        }
-    }
-}
-
-void Aires(){
-    srand(time(NULL));
-    int option1 = rand() % 7;
-    int option2 = rand() % 7;
-    while (option1 == option2){
-        option2 = rand() % 7;
-    }
-    if (option1 > option2){
-        int temp = option1;
-        option1 = option2;
-        option2 = temp;
-    }
-    char tabMesures[7][5] = {"km2", "hm2", "dam2", "m2", "dm2", "cm2", "mm2"};
-    int trouve = 0;
-    int i = 1;
-    int resultat;
-    int a = rand() % 10;
-    int reponse = a*pow(10, (option2-option1)*2);
-    while (trouve == 0 && i <= 3){
-        printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
-        scanf("%d", &resultat);
-        if (resultat == reponse){
-            trouve = 1;
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-        } else {
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        i++;
-    }
-    if (trouve == 0){
-        printf("La reponse etait %d\n", reponse);
-    }
-}
-
 typedef struct {
     char nom[20];
     int score;
+    char dateHeure[20]; // Champ pour stocker la date et l'heure
 } Joueur;
 
 void sauvegarderScore(char *nomJoueur, int nouveauxPoints) {
@@ -412,16 +18,21 @@ void sauvegarderScore(char *nomJoueur, int nouveauxPoints) {
     int joueurExistant = 0;
 
     // Récupérer la date et l'heure actuelles
-    char dateHeure[20];
-    strftime(dateHeure, sizeof(dateHeure), "%Y-%m-%d %H:%M:%S", localtime(&(time_t){time(NULL)}));
+    char dateHeureActuelle[20];
+    time_t now = time(NULL);
+    strftime(dateHeureActuelle, sizeof(dateHeureActuelle), "%Y-%m-%d %H:%M:%S", localtime(&now));
+
+
 
     // Lire les scores existants dans le fichier
     if (fichier != NULL) {
-        while (fscanf(fichier, "%s %d", joueurs[nbJoueurs].nom, &joueurs[nbJoueurs].score) != EOF) {
+        while (fscanf(fichier, "%s %d %[^\n]", joueurs[nbJoueurs].nom, &joueurs[nbJoueurs].score, joueurs[nbJoueurs].dateHeure) != EOF) {
             if (strcmp(joueurs[nbJoueurs].nom, nomJoueur) == 0) {
-                // Mettre à jour le score et marquer le joueur comme existant
-                joueurs[nbJoueurs].score = nouveauxPoints;
+                // Ajouter les nouveaux points au score existant et mettre à jour la date/heure
+                joueurs[nbJoueurs].score += nouveauxPoints;
+                strcpy(joueurs[nbJoueurs].dateHeure, dateHeureActuelle);
                 joueurExistant = 1;
+
             }
             nbJoueurs++;
         }
@@ -432,6 +43,7 @@ void sauvegarderScore(char *nomJoueur, int nouveauxPoints) {
     if (!joueurExistant) {
         strcpy(joueurs[nbJoueurs].nom, nomJoueur);
         joueurs[nbJoueurs].score = nouveauxPoints;
+        strcpy(joueurs[nbJoueurs].dateHeure, dateHeureActuelle);
         nbJoueurs++;
     }
 
@@ -444,13 +56,7 @@ void sauvegarderScore(char *nomJoueur, int nouveauxPoints) {
 
     for (int i = 0; i < nbJoueurs; i++) {
         // Écrire chaque joueur avec son score et la date/heure
-        if (strcmp(joueurs[i].nom, nomJoueur) == 0) {
-            // Ajouter la date/heure pour le joueur actuel
-            fprintf(fichier, "%s %d %s\n", joueurs[i].nom, joueurs[i].score, dateHeure);
-        } else {
-            // Écrire les autres joueurs sans modification
-            fprintf(fichier, "%s %d\n", joueurs[i].nom, joueurs[i].score);
-        }
+        fprintf(fichier, "%s %d %s\n", joueurs[i].nom, joueurs[i].score, joueurs[i].dateHeure);
     }
 
     fclose(fichier);
@@ -474,13 +80,25 @@ int main() {
         // Ouvrir le fichier et chercher le joueur
         FILE *fichier = fopen("scores.txt", "r");
         if (fichier != NULL) {
-            while (fscanf(fichier, "%s %d", nom, &AncienScore) != EOF) {
+            int joueurTrouve = 0;
+            char dateHeure[20];
+            while (fscanf(fichier, "%s %d %s", nom, &AncienScore, dateHeure) != EOF) {
                 if (strcmp(nom, NomRecherche) == 0) {
-                    printf("Bienvenue %s, vous avez %d points\n", nom, AncienScore);
+                    printf("Bienvenue %s, vous avez %d points (dernière connexion : %s)\n", nom, AncienScore, dateHeure);
+                    points = AncienScore; // Charger le score existant
+                    joueurTrouve = 1;
                     break;
                 }
             }
             fclose(fichier);
+
+            if (!joueurTrouve) {
+                printf("Joueur non trouvé, un nouveau compte sera créé.\n");
+                strcpy(nom, NomRecherche);
+            }
+        } else {
+            printf("Aucun fichier de scores trouvé, un nouveau sera créé.\n");
+            strcpy(nom, NomRecherche);
         }
     }
 
