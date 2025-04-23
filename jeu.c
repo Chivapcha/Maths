@@ -358,21 +358,21 @@ void Durees(){
 
 void Aires(){
     srand(time(NULL));
-    int option1 = rand() % 7;
-    int option2 = rand() % 7;
+    int option1 = rand() % 5;
+    int option2 = rand() % 5;
     while (option1 == option2){
-        option2 = rand() % 7;
+        option2 = rand() % 5;
     }
     if (option1 > option2){
         int temp = option1;
         option1 = option2;
         option2 = temp;
     }
-    char tabMesures[7][5] = {"km2", "hm2", "dam2", "m2", "dm2", "cm2", "mm2"};
+    char tabMesures[5][5] = {"dam2", "m2", "dm2", "cm2", "mm2"}; // sur le site on va de km jusqu'à mm, mais dans ce programme ça marche pas, apparemment le nombre est trop long et ça renvoie un chiffre négatif
     int trouve = 0;
     int i = 1;
     int resultat;
-    int a = rand() % 10;
+    int a = rand() % 9 + 1;
     int reponse = a*pow(10, (option2-option1)*2);
     while (trouve == 0 && i <= 3){
         printf("%d %s = ? %s \n", a, tabMesures[option1], tabMesures[option2]);
