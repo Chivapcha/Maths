@@ -183,7 +183,7 @@ int main() {
                 break;
             case 0:
                 printf("Merci pour votre visite\n");
-                printf("Vous avez obtenu %d points\n", points);
+                printf("Vous avez %d points en tout.\n", points);
 
                 // Demander à sauvegarder les points
                 char choixSauvegarde;
