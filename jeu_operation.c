@@ -5,12 +5,15 @@
 #include <ctype.h>
 
 void jeu(){
+    // déclaration des variables
     int reponse_candidat;
     int resultat;
     int reponse_correcte;
     int nombre1,nombre2,nombre3,nombre4;
+    // déclaration des opérations
     char operation[][4] = {"+", "-", "*", "/"};
     srand(time(NULL));
+    // génération aléatoire des nombres et des opérations
     nombre1 = rand() % 10 + 1;
     nombre2 = rand() % 10 + 1;
     nombre3 = rand() % 10 + 1;
@@ -18,7 +21,7 @@ void jeu(){
     int op1 = rand() % 4;
     int op2 = rand() % 4;
     int op3 = rand() % 4;
-
+    // mélange des nombres on mélange les nombres pour éviter de toujours avoir le même ordre
     int numbers[] = {nombre1, nombre2, nombre3, nombre4};
     for (int i = 3; i > 0; i--) {
         int j = rand() % (i + 1);
@@ -26,7 +29,7 @@ void jeu(){
         numbers[i] = numbers[j];
         numbers[j] = temp;
     }
-
+    // on fait le calcul en fonction des opérations
     switch (op1) {
         case 0: resultat = numbers[0] + numbers[1]; break;
         case 1: resultat = numbers[0] - numbers[1]; break;
@@ -47,6 +50,7 @@ void jeu(){
         case 2: resultat *= numbers[3]; break;
         case 3: resultat /= numbers[3]; break;
     }
+    // affichage du problème
     printf("Ecris l'operation pour trouver : %d\n", resultat);
     printf("Tu dois utiliser les nombres suivants : %d, %d, %d et %d\n", nombre1, nombre2, nombre3, nombre4);
     printf("Tu peux utiliser les opérations +, -, * et les parenthèses ( ). Exemple : (8*3)+(4*7)\n");
@@ -54,7 +58,7 @@ void jeu(){
     char reponse_candidat_texte[100];
     char resultat_texte[100];
 
-    // Convert the result into a string representation of the operation
+    // Convertis le résultat en texte
     sprintf(resultat_texte, "(%d %s %d) %s %d %s %d", 
             numbers[0], operation[op1], numbers[1], 
             operation[op2], numbers[2], 
