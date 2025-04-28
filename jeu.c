@@ -778,6 +778,8 @@ void Probleme(){
     int i = 1;
     // on regarde si l'utilisateurs a bon
     while(trouve == 0 && i<=3){
+        printf("Il y a %d %s dans %d %s on donne %d %s, combient y a t-il de %s maintenant? \n", nombres, choixBoite[choix2], nombres2, tab[choix1], nombres3, choixBoite[choix2], choixBoite[choix2]);
+        scanf("%d", &reponse_candidat);
         // on vérifie la réponse
         // si la réponse est correcte, on affiche un message de félicitations et on ajoute des points en fonction des essais
         if (reponse_candidat == reponse_correcte){
