@@ -859,8 +859,8 @@ void jeu_op(){
     // affichage du problème
     printf("Ecris l'operation pour trouver : %d\n", resultat);
     printf("Tu dois utiliser les nombres suivants : %d, %d, %d et %d\n", nombre1, nombre2, nombre3, nombre4);
-    printf("Tu peux utiliser les opérations +, -, * et les parenthèses ( ). Exemple : (8*3)+(4*7)\n");
-    printf("Ecris ta réponse : ");
+    printf("Tu peux utiliser les operations +, -, * et les parentheses ( ). Exemple : (8*3)+(4*7)\n");
+    printf("Ecris ta reponse : ");
     char reponse_candidat_texte[100];
     char resultat_texte[100];
 
@@ -965,36 +965,13 @@ void jeu_op(){
     }
     //le résultat final est le dernier élément de la pile
     reponse_correcte = stack[top];
-    int trouve = 0;
-    int i = 1;
-    // on regarde si l'utilisateurs a bon
-    while(trouve == 0 && i<=3){
-        // on vérifie la réponse
-        // si la réponse est correcte, on affiche un message de félicitations et on ajoute des points en fonction des essais
-        if (resultat == reponse_correcte){
-            trouve = 1;
-            printf("Bravo !\n");
-            if (i == 1) {
-                printf("Vous avez gagne 10 points\n");
-                points += 10;
-            } else if (i == 2) {
-                printf("Vous avez gagne 5 points\n");
-                points += 5;
-            } else {
-                printf("Vous avez gagne 1 point\n");
-                points += 1;
-            }
-        }
-        // si la réponse est fausse, on affiche un message d'erreur et on lui dit combien d'essais il lui reste
-        else{
-            printf("Perdu... Il vous reste %d essais\n", 3-i);
-        }
-        // on incrémente le nombre d'essais
-        i++;
-    }
-    // si au bout des essais l'utilisateur n'a pas trouvé la bonne réponse, on lui affiche la bonne réponse
-    if (trouve == 0){
-        printf("La reponse etait %d\n", resultat_texte);
+
+    // vérifie que le résultat est correct
+    if (reponse_correcte == resultat) {
+        printf("Bravo, vous avez repondu juste et gagne 10 points !\n");
+        points += 10; // on ajoute 10 points si la réponse est correcte
+    } else {
+        printf("Dommage, la bonne reponse etait : %s. Vous n'avez pas gagne de points.\n", resultat_texte);
     }
 }
 
